@@ -34,18 +34,46 @@ class HeatMapWeekText extends StatelessWidget {
       children: <Widget>[
         if (!(weekLabelWidgets?.isEmpty ?? true)) ...weekLabelWidgets!,
         for (String label in DateUtil.WEEK_LABEL)
-          Container(
-            height: size ?? 20,
-            margin: margin ?? const EdgeInsets.all(2.0),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: fontSize ?? 12,
-                color: fontColor,
-              ),
-            ),
+          HeatMapWeekTextContainerWidget(
+            size: size,
+            margin: margin,
+            label: label,
+            fontSize: fontSize,
+            fontColor: fontColor,
           ),
       ],
+    );
+  }
+}
+
+class HeatMapWeekTextContainerWidget extends StatelessWidget {
+  const HeatMapWeekTextContainerWidget({
+    Key? key,
+    required this.size,
+    required this.margin,
+    required this.label,
+    required this.fontSize,
+    required this.fontColor,
+  }) : super(key: key);
+
+  final double? size;
+  final EdgeInsets? margin;
+  final String label;
+  final double? fontSize;
+  final Color? fontColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: size ?? 20,
+      margin: margin ?? const EdgeInsets.all(2.0),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: fontSize ?? 12,
+          color: fontColor,
+        ),
+      ),
     );
   }
 }
