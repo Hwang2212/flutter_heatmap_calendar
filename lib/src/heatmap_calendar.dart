@@ -159,17 +159,6 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
               ),
               onPressed: () => changeMonth(-1),
             ),
-
-            // Text which shows the current year and month
-            Text(
-              DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
-                  ' ' +
-                  (_currentDate?.year).toString(),
-              style: TextStyle(
-                fontSize: widget.monthFontSize ?? 12,
-              ),
-            ),
-
             // Next month button.
             IconButton(
               icon: const Icon(
