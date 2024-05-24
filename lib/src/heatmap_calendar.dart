@@ -256,10 +256,10 @@ class HeatMapWeekCalendarTextWidget extends StatelessWidget {
       false,
       Container(
         margin: EdgeInsets.only(
-          left: margin?.left ?? 2,
-          right: margin?.right ?? 2,
+          left: margin?.left ?? 3,
+          right: margin?.right ?? 3,
         ),
-        width: size ?? 42,
+        width: size ?? 44,
         alignment: Alignment.center,
         child: Text(
           label,
