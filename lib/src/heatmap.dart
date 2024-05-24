@@ -87,6 +87,7 @@ class HeatMap extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double? colorTipSize;
 
+  /// Custom Week Label that replaces [Sun, Mon, Tue, Wed, Thu, Fri, Sat].
   final List<Widget>? weekLabelWidgets;
 
   const HeatMap({

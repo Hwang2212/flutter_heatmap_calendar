@@ -87,6 +87,9 @@ class HeatMapCalendar extends StatefulWidget {
   /// The double value of [HeatMapColorTip]'s tip container's size.
   final double? colorTipSize;
 
+  /// Custom Week Label that replaces [Sun, Mon, Tue, Wed, Thu, Fri, Sat].
+  final List<Widget>? weekLabelWidgets;
+
   const HeatMapCalendar({
     Key? key,
     required this.colorsets,
@@ -109,6 +112,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.colorTipHelper,
     this.colorTipCount,
     this.colorTipSize,
+    this.weekLabelWidgets,
   }) : super(key: key);
 
   @override
@@ -177,27 +181,18 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
   Widget _weekLabel() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        for (String label in DateUtil.WEEK_LABEL.skip(1))
-          WidgetUtil.flexibleContainer(
-            widget.flexible ?? false,
-            false,
-            Container(
-              margin: EdgeInsets.only(
-                  left: widget.margin?.left ?? 2,
-                  right: widget.margin?.right ?? 2),
-              width: widget.size ?? 42,
-              alignment: Alignment.center,
-              child: Text(
-                label,
-                style: TextStyle(
-                  fontSize: widget.weekFontSize ?? 12,
-                  color: widget.weekTextColor ?? const Color(0xFF758EA1),
-                ),
+      children: widget.weekLabelWidgets ??
+          <Widget>[
+            for (String label in DateUtil.WEEK_LABEL.skip(1))
+              HeatMapWeekCalendarTextWidget(
+                label: label,
+                size: widget.size,
+                weekFontSize: widget.weekFontSize,
+                weekTextColor: widget.weekTextColor,
+                margin: widget.margin,
+                flexible: widget.flexible,
               ),
-            ),
-          ),
-      ],
+          ],
     );
   }
 
@@ -239,6 +234,47 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
               size: widget.colorTipSize,
             ),
         ],
+      ),
+    );
+  }
+}
+
+class HeatMapWeekCalendarTextWidget extends StatelessWidget {
+  const HeatMapWeekCalendarTextWidget({
+    Key? key,
+    this.flexible,
+    this.weekFontSize,
+    required this.label,
+    this.weekTextColor,
+    this.margin,
+    this.size,
+  }) : super(key: key);
+
+  final bool? flexible;
+  final double? weekFontSize;
+  final String label;
+  final Color? weekTextColor;
+  final EdgeInsets? margin;
+  final double? size;
+  @override
+  Widget build(BuildContext context) {
+    return WidgetUtil.flexibleContainer(
+      flexible ?? false,
+      false,
+      Container(
+        margin: EdgeInsets.only(
+          left: margin?.left ?? 2,
+          right: margin?.right ?? 2,
+        ),
+        width: size ?? 42,
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: weekFontSize ?? 12,
+            color: weekTextColor ?? const Color(0xFF758EA1),
+          ),
+        ),
       ),
     );
   }

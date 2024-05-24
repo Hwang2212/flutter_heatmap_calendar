@@ -14,7 +14,7 @@ class HeatMapWeekText extends StatelessWidget {
   /// The color value of every font's color.
   final Color? fontColor;
 
-  /// Customizable Week Label
+  /// Custom Week Label that replaces [Sun, Mon, Tue, Wed, Thu, Fri, Sat].
   final List<Widget>? weekLabelWidgets;
 
   const HeatMapWeekText({
