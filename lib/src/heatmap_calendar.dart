@@ -90,6 +90,8 @@ class HeatMapCalendar extends StatefulWidget {
   /// Custom Week Label that replaces [Sun, Mon, Tue, Wed, Thu, Fri, Sat].
   final List<Widget>? weekLabelWidgets;
 
+  final Widget? changeMonthWidget;
+
   const HeatMapCalendar({
     Key? key,
     required this.colorsets,
@@ -113,6 +115,7 @@ class HeatMapCalendar extends StatefulWidget {
     this.colorTipCount,
     this.colorTipSize,
     this.weekLabelWidgets,
+    this.changeMonthWidget,
   }) : super(key: key);
 
   @override
@@ -144,38 +147,39 @@ class _HeatMapCalendar extends State<HeatMapCalendar> {
 
   /// Header widget which shows left, right buttons and year/month text.
   Widget _header() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        // Previous month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            size: 14,
-          ),
-          onPressed: () => changeMonth(-1),
-        ),
+    return widget.changeMonthWidget ??
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            // Previous month button.
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                size: 14,
+              ),
+              onPressed: () => changeMonth(-1),
+            ),
 
-        // Text which shows the current year and month
-        Text(
-          DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
-              ' ' +
-              (_currentDate?.year).toString(),
-          style: TextStyle(
-            fontSize: widget.monthFontSize ?? 12,
-          ),
-        ),
+            // Text which shows the current year and month
+            Text(
+              DateUtil.MONTH_LABEL[_currentDate?.month ?? 0] +
+                  ' ' +
+                  (_currentDate?.year).toString(),
+              style: TextStyle(
+                fontSize: widget.monthFontSize ?? 12,
+              ),
+            ),
 
-        // Next month button.
-        IconButton(
-          icon: const Icon(
-            Icons.arrow_forward_ios,
-            size: 14,
-          ),
-          onPressed: () => changeMonth(1),
-        ),
-      ],
-    );
+            // Next month button.
+            IconButton(
+              icon: const Icon(
+                Icons.arrow_forward_ios,
+                size: 14,
+              ),
+              onPressed: () => changeMonth(1),
+            ),
+          ],
+        );
   }
 
   Widget _weekLabel() {
