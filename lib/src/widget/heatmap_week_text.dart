@@ -14,19 +14,25 @@ class HeatMapWeekText extends StatelessWidget {
   /// The color value of every font's color.
   final Color? fontColor;
 
-  const HeatMapWeekText({
+  /// Customizable Week Label
+  final List<Widget>? weekLabelWidgets;
+
+  HeatMapWeekText({
     Key? key,
     this.margin,
     this.fontSize,
     this.size,
     this.fontColor,
-  }) : super(key: key);
+    this.weekLabelWidgets,
+  })  : assert(weekLabelWidgets!.length <= DateUtil.WEEK_LABEL.length),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
+        if (!(weekLabelWidgets?.isEmpty ?? true)) ...weekLabelWidgets!,
         for (String label in DateUtil.WEEK_LABEL)
           Container(
             height: size ?? 20,
