@@ -17,15 +17,14 @@ class HeatMapWeekText extends StatelessWidget {
   /// Customizable Week Label
   final List<Widget>? weekLabelWidgets;
 
-  HeatMapWeekText({
+  const HeatMapWeekText({
     Key? key,
     this.margin,
     this.fontSize,
     this.size,
     this.fontColor,
     this.weekLabelWidgets,
-  })  : assert(weekLabelWidgets!.length <= DateUtil.WEEK_LABEL.length),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
